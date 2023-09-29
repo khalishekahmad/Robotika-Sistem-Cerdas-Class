@@ -1,3 +1,7 @@
+#Daffa Asyqar Ahmad Khalisheka
+#1103200034
+
+
 # Impor kelas RobotControl dari modul robot_control_class
 from robot_control_class import RobotControl
 
