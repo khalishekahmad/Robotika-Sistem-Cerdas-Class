@@ -1,0 +1,28 @@
+#Daffa Asyqar Ahmad Khalisheka
+#1103200034
+
+#Unit 4 Methods Python 3 The Construct Sim
+
+from robot_control_class import RobotControl
+
+# Import class RobotControl dari modul robot_control_class.
+
+robotcontrol = RobotControl(robot_name="summit")
+
+# Membuat objek 'robotcontrol' dengan menggunakan class RobotControl dan menginisialisasi nama robot sebagai "summit".
+
+robotcontrol.move_straight_time("forward", 0.3, 5)
+
+# Memanggil metode 'move_straight_time' pada objek 'robotcontrol'.
+# Metode ini menggerakkan robot ke depan ("forward") dengan kecepatan 0.3 m/s selama 5 detik.
+
+robotcontrol.turn("clockwise", 0.3, 7)
+
+# Memanggil metode 'turn' pada objek 'robotcontrol'.
+# Metode ini memutar robot searah jarum jam ("clockwise") dengan kecepatan 0.3 rad/s selama 7 detik.
+
+# Kode di atas digunakan untuk menggerakkan robot "summit" maju selama 5 detik dengan kecepatan 0.3 m/s,
+# lalu memutar robot searah jarum jam selama 7 detik dengan kecepatan 0.3 rad/s.
+
+#Command Line Shell
+python test_methods3.py
