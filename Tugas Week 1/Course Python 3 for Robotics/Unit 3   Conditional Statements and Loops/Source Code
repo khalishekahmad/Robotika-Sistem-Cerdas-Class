@@ -1,1 +1,22 @@
+#Nama  : Daffa Asyqar Ahmad Khalisheka
+# Nim  : 1103200034
+# Unit 3   Conditional Statements and Loops The COnstruct Sim
+
+# Meminta input dari pengguna mengenai film favorit mereka
+movie = input("What's your favorite movie? ")
+
+# Memeriksa apakah film yang dimasukkan pengguna adalah "Avengers Endgame"
+if movie == "Avengers Endgame":
+    # Jika iya, mencetak pesan positif
+    print("Good choice!")
+
+#Command Line
+python fav_movie.py
+
+movie = input("What's your favorite movie? ")
+
+if movie == "Avengers Endgame" or movie == "Titanic":
+    print("Good choice!")
+if movie == "Star Wars":
+    print("Also a good choice!")
 
