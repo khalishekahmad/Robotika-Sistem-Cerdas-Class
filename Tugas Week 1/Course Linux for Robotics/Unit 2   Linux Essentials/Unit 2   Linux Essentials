@@ -1,0 +1,15 @@
+#Daffa Asyqar Ahmad Khalisheka
+#1103200034
+
+#Unit 2 Linux Essentials
+
+#   Execute in Shell 1
+cd /home/user/catkin_ws/src/
+
+git clone https://bitbucket.org/theconstructcore/linux_course_files.git
+
+#   Execute in Shell  1
+cd /home/user/catkin_ws/src/linux_course_files/move_bb8_pkg/src/
+
+
+
