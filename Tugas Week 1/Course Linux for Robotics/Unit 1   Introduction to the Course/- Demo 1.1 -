@@ -1,0 +1,22 @@
+#Daffa Asyqar Ahmad Khalisheka
+#1103200034
+
+#Unit 1   Introduction to the Course
+
+#Execute in Shell 1
+cd /home/simulations/public_sim_ws/src/all/ros_basics_examples/linux_demo/
+
+#Execute in Shell 1
+./demo.sh rotate
+
+#Shell #1 Output
+user:/home/simulations/public_sim_ws/src/all/ros_basics_examples/linux_demo$ ./demo.sh forward
+publishing and latching message. Press ctrl-C to terminate
+
+#   Execute in Shell 1
+./demo.sh stop
+
+#Execute in Shell #1
+./demo.sh forward
+
+
