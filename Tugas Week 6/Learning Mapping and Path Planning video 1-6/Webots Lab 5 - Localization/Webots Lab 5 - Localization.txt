@@ -1,0 +1,18 @@
+All tasks: 
+	print:
+	4x4 grid of already visited cells
+	[x = visited | . = not visited
+	|. . . .|
+	|. . . .|
+	|x x x x|
+	|. . . x|
+
+- 	the state the robot is in
+	robot pose = (x, y , grid number, orientation)
+
+
+task 1 - localization with Trilateration
+	objective: robot localization, using motion, sensors, and camera devices
+	test: - trilateration beta testing 
+	task 1 full map run
+	bug assumptions
