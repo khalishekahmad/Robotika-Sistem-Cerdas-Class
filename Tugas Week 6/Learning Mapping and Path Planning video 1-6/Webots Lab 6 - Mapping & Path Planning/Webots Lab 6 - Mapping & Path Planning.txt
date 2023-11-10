@@ -1,0 +1,18 @@
+All tasks: 
+print: 
+4x4 grid of already visited cells
+[x = visited |. = not visited
+
+the state the robot is in 
+robot pose = (x, y, grid number, orientation)
+
+task 1 - wall mapping 
+objective map the internal wall configuration (map will not be known)
+test - run it
+
+task 2 - path planning with wavefront planner 
+objective use wavefront planner algorithm to generate the shortest path from start to goal. then have robot follow path [start, goal and map are known in advance]
+
+test start = 16 goal = 10
+start = 16 goal = 6
+start = 13 goal = 1
