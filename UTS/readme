@@ -2,3 +2,26 @@ Tutorial Webots Robot pengikut Project Wall menggunakan e-puck // Kode pengontro
 Membuat robot yang dapat menyelesaikan labirin dengan menggunakan logika wall following.
 
 Menggunakan aplikasi webots dengan robot e-puck dan menggunakan bahasa pemrograman Python.
+
+========== DESKRIPSI DETAIL ==========
+
+Bagian Satu: Pengaturan Proyek
+Pelajari cara membuat proyek baru di Webots, ubah ukuran arena, dan tambahkan robot e-puck di Webots.
+
+Bagian Kedua: Membangun labirin
+Belajar menambahkan objek seperti dinding di Webots. Kemudian belajar menerjemahkan dan memutar objek di Webots. Gandakan dinding untuk membuat labirin Anda sendiri di Webots.
+
+Bagian Tiga: Membuat pengontrol
+Pelajari cara membuat pengontrol untuk proyek Webots Anda. Pastikan untuk mengubah pengontrol default di e-puck untuk menggunakan pengontrol Anda.
+
+Bagian Empat: Kode pengontrol dengan Python 3 
+Di bagian ini, pelajari cara menulis kode Python dasar untuk Webots. Pelajari cara membuat instance robot, aktifkan motor dan sensor jarak/kedekatan di Webots.
+
+Bagian Lima: Deteksi dinding
+Belajar mendeteksi dinding menggunakan sensor jarak (jenis sensor jarak) di Webots. Jadi, belajar juga membaca nilai dari sensor jarak. Pelajari cara melihat sinar sensor jarak untuk visualisasi di Webots.
+
+Bagian Enam: Logika mengikuti dinding
+Penjelasan mendetail tentang cara kerja logika berikut. Kami akan membahas berbagai skenario termasuk kasus sudut dan cara mengatasinya.
+
+Bagian Tujuh: Kode berikut dinding dengan Python 3
+Kami akan mengkodekan pengontrol Webots dengan Python 3 agar e-puck menampilkan perilaku mengikuti dinding.
