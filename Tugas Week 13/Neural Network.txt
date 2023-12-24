@@ -1,0 +1,58 @@
+```python
+# Import TensorFlow library dan modul yang diperlukan
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Flatten, Dense, Dropout, BatchNormalization
+from tensorflow.keras.callbacks import EarlyStopping
+
+# Membuat model Sequential
+model = Sequential([
+    Flatten(input_shape=(150, 150, 3)),  # Meratakan input gambar
+    
+    Dense(64, activation='relu'),  # Menambahkan lapisan Dense dengan 64 unit dan fungsi aktivasi ReLU
+    BatchNormalization(),  # Menambahkan lapisan normalisasi batch untuk meningkatkan stabilitas dan kecepatan konvergensi
+    Dropout(0.4),  # Menambahkan lapisan dropout untuk mencegah overfitting dengan tingkat dropout 0.4
+    
+    Dense(32, activation='relu'),  # Lapisan Dense dengan 32 unit dan aktivasi ReLU
+    BatchNormalization(),  # Normalisasi batch
+    Dropout(0.4),  # Dropout
+    
+    Dense(64, activation='relu'),  # Lapisan Dense dengan 64 unit dan aktivasi ReLU
+    BatchNormalization(),  # Normalisasi batch
+    Dropout(0.4),  # Dropout
+    
+    Dense(512, activation='relu'),  # Lapisan Dense dengan 512 unit dan aktivasi ReLU
+    BatchNormalization(),  # Normalisasi batch
+    Dropout(0.5),  # Dropout
+    
+    Dense(256, activation='relu'),  # Lapisan Dense dengan 256 unit dan aktivasi ReLU
+    BatchNormalization(),  # Normalisasi batch
+    Dropout(0.5),  # Dropout
+    
+    Dense(6, activation='softmax')  # Lapisan Dense output dengan 6 unit (sesuai dengan jumlah kelas) dan aktivasi softmax
+])
+
+# Menambahkan callback Early Stopping
+early_stopping = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
+
+# Mengompilasi model dengan optimizer Adam, fungsi loss categorical_crossentropy, dan metrik akurasi
+model.compile(optimizer=tf.optimizers.Adam(),
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
+
+# Melatih model dengan data dari train_generator dan melakukan validasi dengan validation_generator
+history = model.fit(
+    train_generator,
+    epochs=50,  # Jumlah epoch dapat disesuaikan
+    validation_data=validation_generator,
+    callbacks=[early_stopping]  # Menyertakan callback Early Stopping
+)
+```
+
+Penjelasan:
+
+1. **Model Sequential**: Model dibangun menggunakan Sequential API, diawali dengan meratakan input gambar.
+2. **Lapisan Dense**: Berisi lapisan-lapisan dense dengan jumlah unit dan fungsi aktivasi yang berbeda, yang diikuti oleh lapisan normalisasi batch dan dropout untuk mencegah overfitting.
+3. **Callback Early Stopping**: Ditambahkan callback EarlyStopping untuk menghentikan pelatihan jika tidak terjadi peningkatan pada kerugian validasi setelah beberapa epoch (patience=5), dan merestorasi bobot terbaik.
+4. **Kompile Model**: Model dikompilasi dengan optimizer Adam, fungsi loss categorical_crossentropy, dan metrik akurasi.
+5. **Pelatihan Model**: Model dilatih dengan menggunakan data dari `train_generator`, dengan melakukan validasi menggunakan `validation_generator`. Callback Early Stopping juga disertakan untuk memonitor dan menghentikan pelatihan jika diperlukan.
