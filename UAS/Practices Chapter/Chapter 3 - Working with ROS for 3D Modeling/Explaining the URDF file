@@ -1,0 +1,55 @@
+When we check the code, we can add a <robot> tag at the top of the description. In this 
+way, we inform our system that we are visualizing a markup language file. This also allows 
+the text editor to highlight the keywords of the file: 
+<?xml version="1.0"?> 
+<robot name="pan_tilt">
+
+If we check the sections after the <robot> tag definition, we can view the link and joint 
+definitions of the pan-and-tilt mechanism:
+ <link name="base_link"> 
+ <visual> 
+ <geometry> 
+ <cylinder length="0.01" radius="0.2"/> 
+ </geometry> 
+ <origin rpy="0 0 0" xyz="0 0 0"/> 
+ <material name="yellow"> 
+ <color rgba="1 1 0 1"/> 
+ </material> 
+ </visual> 
+ </link> 
+
+
+The preceding code snippet is the base_link definition of the pan-and-tilt mechanism. 
+The <visual> tag describes the visual appearance of the link, which is shown on the 
+robot simulation. We can define the link geometry (cylinder, box, sphere, or mesh) 
+and the material (color and texture) of the link using this tag:
+ <joint name="pan_joint" type="revolute"> 
+ <parent link="base_link"/> 
+ <child link="pan_link"/> 
+ <origin xyz="0 0 0.1"/> 
+ <axis xyz="0 0 1" /> 
+ </joint>
+
+Save the preceding URDF code as pan_tilt.urdf and check whether the urdf file 
+contains errors using the following command:
+check_urdf pan_tilt.urdf 
+
+To use this command, the liburdfdom-tools package must be installed. You can 
+install it using the following command: 
+sudo apt-get install liburdfdom-tools 
+
+The check_urdf command will parse the urdf tag and show an error if there is one. If 
+everything is OK, it will output the following:
+robot name is: pan_tilt
+---------- Successfully Parsed XML ---------------
+ root Link: base_link has 1 child(ren)
+ child(1): pan_link
+ child(1): tilt_link 
+
+If we want to view the structure of the robot links and joints graphically, we can use a 
+command tool called urdf_to_graphiz:
+urdf_to_graphiz pan_tilt.urdf 
+
+This command will generate two files: pan_tilt.gv and pan_tilt.pdf. We can view 
+the structure of this robot using this command:
+evince pan_tilt.pdf 
