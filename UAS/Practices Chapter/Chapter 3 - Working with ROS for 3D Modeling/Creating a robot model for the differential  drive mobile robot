@@ -1,0 +1,110 @@
+The first section of the URDF file is given here. The robot is named differential_
+wheeled_robot, and it also includes a URDF file, called wheel.urdf.xacro. This 
+xacro file contains the definition of the wheel and its transmission; if we use this xacro 
+file, we can avoid adding two different definitions for the two wheels. We use this xacro 
+definition because the two wheels are identical in shape and size:
+<?xml version="1.0"?> 
+<robot name="differential_wheeled_robot" xmlns:xacro="http://
+ros.org/wiki/xacro"> 
+ <xacro:include filename="$(find mastering_ros_robot_
+description_pkg)/urdf/wheel.urdf.xacro"> 
+The definition of a wheel inside wheel.urdf.xacro is given 
+here. We can mention whether the wheel must be placed to the 
+left, right, front, or back. Using this macro, we can create a 
+maximum of four wheels but, for now, we require only two:
+<xacro:macro name="wheel" params="fb lr parent translateX 
+translateY flipY"> <!--fb : front, back ; lr: left, right --> 
+ <link name="${fb}_${lr}_wheel"> 
+
+We also mention the Gazebo parameters required for simulation. The Gazebo parameters 
+associated with a wheel are also mentioned here. We can mention the frictional coefficient 
+and the stiffness coefficient using the gazebo reference tag:
+ <gazebo reference="${fb}_${lr}_wheel"> 
+ <mu1 value="1.0"/> 
+ <mu2 value="1.0"/> 
+ <kp value="10000000.0" /> 
+ <kd value="1.0" /> 
+ <fdir1 value="1 0 0"/> 
+ <material>Gazebo/Grey</material> 
+ <turnGravityOff>false</turnGravityOff> 
+ </gazebo> 
+
+The joints that we define for a wheel are continuous joints because there are no limits in 
+the wheel joint. The parent link here is the robot base, and the child link is 
+each wheel:
+ <joint name="${fb}_${lr}_wheel_joint" type="continuous"> 
+ <parent link="${parent}"/> 
+ <child link="${fb}_${lr}_wheel"/> 
+<origin xyz="${translateX * base_x_origin_to_wheel_origin} 
+${translateY * base_y_origin_to_wheel_origin} ${base_z_origin_
+to_wheel_origin}" rpy="0 0 0" /> 
+ <axis xyz="0 1 0" rpy="0 0 0" />
+ <limit effort="100" velocity="100"/>
+ <joint_properties damping="0.0" friction="0.0"/>
+ </joint> 
+
+We also need to mention the transmission tag of each wheel. The macro of the wheel 
+is as follows:
+ <!-- Transmission is important to link the joints and the 
+controller --> 
+ <transmission name="${fb}_${lr}_wheel_joint_trans"> 
+ <type>transmission_interface/SimpleTransmission</type> 
+ <joint name="${fb}_${lr}_wheel_joint" /> 
+ <actuator name="${fb}_${lr}_wheel_joint_motor"> 
+ <hardwareInterface>EffortJointInterface</
+hardwareInterface> 
+ <mechanicalReduction>1</mechanicalReduction> 
+ </actuator> 
+ </transmission> 
+ </xacro:macro> 
+</robot> 
+
+In the diff_wheeled_robot.xacro file, we can use the following lines to use the 
+macros defined inside the wheel.urdf.xacro file:
+ <xacro:wheel fb="front" lr="right" parent="base_link" 
+translateX="0" translateY="0.5" flipY="1"/>
+ <xacro:wheel fb="front" lr="left" parent="base_link" 
+translateX="0" translateY="-0.5" flipY="1"/>
+
+Using the preceding lines, we define the wheels on the left and right of the robot base. The 
+robot base is cylindrical, as shown in the preceding figure. The inertia calculating macro 
+is given here. This xacro snippet will use the mass, radius, and height of the cylinder to 
+calculate the inertia using this equation:
+ <!-- Macro for calculating inertia of cylinder --> 
+ <macro name="cylinder_inertia" params="m r h"> 
+ <inertia ixx="${m*(3*r*r+h*h)/12}" ixy = "0" ixz = "0" 
+ iyy="${m*(3*r*r+h*h)/12}" iyz = "0" 
+ izz="${m*r*r/2}" /> 
+ </macro>
+
+The launch file definition to display this root model in RViz is given here. The launch file 
+is named view_mobile_robot.launch:
+<launch> 
+<?xml version="1.0" ?>
+ <arg name="model" />
+ <!-- Parsing xacro and setting robot_description 
+parameter -->
+ <param name="robot_description" command="$(find xacro)/
+xacro $(find mastering_ros_robot_description_pkg)/urdf/diff_
+wheeled_robot.xacro" />
+ <!-- Starting Joint state publisher node which will 
+publish the joint values -->
+ <node name="joint_state_publisher_gui" pkg="joint_state_
+publisher_gui" type="joint_state_publisher_gui" />
+ <!-- Starting robot state publish which will publish tf 
+-->
+ <node name="robot_state_publisher" pkg="robot_state_
+publisher" type="robot_state_publisher" />
+ <!-- Launch visualization in rviz -->
+ <node name="rviz" pkg="rviz" type="rviz" args="-d $(find 
+mastering_ros_robot_description_pkg)/urdf.rviz" required="true" 
+/>
+</launch>
+
+The only difference between the arm URDF file is the change in the robot model to load; 
+the other sections are the same.
+94 Working with ROS for 3D Modeling
+We can view the mobile robot using the following command:
+roslaunch mastering_ros_robot_description_pkg view_mobile_
+robot.launch 
+
