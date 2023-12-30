@@ -1,0 +1,56 @@
+Let's take a look at the URDF code of this mechanism. Navigate to the mastering_
+ros_robot_description_pkg/urdf directory and open pan_tilt.urdf.
+We will start by defining the base link of the root model:
+<?xml version="1.0"?> 
+<robot name="pan_tilt"> 
+ <link name="base_link"> 
+ <visual> 
+ <geometry> 
+ <cylinder length="0.01" radius="0.2"/> 
+ </geometry> 
+ <origin rpy="0 0 0" xyz="0 0 0"/> 
+ <material name="yellow"> 
+ <color rgba="1 1 0 1"/> 
+ </material> 
+ </visual> 
+ </link> 
+
+Then, we will define the pan_joint to connect the base_link and the pan_link:
+ <joint name="pan_joint" type="revolute"> 
+ <parent link="base_link"/> 
+ <child link="pan_link"/> 
+ <origin xyz="0 0 0.1"/> 
+ <axis xyz="0 0 1" /> 
+ </joint> 
+<link name="pan_link"> 
+ <visual> 
+ <geometry> 
+ <cylinder length="0.4" radius="0.04"/> 
+ </geometry> 
+ <origin rpy="0 0 0" xyz="0 0 0.09"/> 
+ <material name="red"> 
+ <color rgba="0 0 1 1"/> 
+ </material> 
+ </visual> 
+ </link> 
+
+Similarly, we will define the tilt_joint to connect the pan_link and the tilt_
+link:
+ <joint name="tilt_joint" type="revolute"> 
+ <parent link="pan_link"/> 
+ <child link="tilt_link"/> 
+ <origin xyz="0 0 0.2"/> 
+ <axis xyz="0 1 0" /> 
+ </joint> 
+ <link name="tilt_link"> 
+ <visual> 
+ <geometry> 
+ <cylinder length="0.4" radius="0.04"/> 
+ </geometry> 
+ <origin rpy="0 1.5 0" xyz="0 0 0"/> 
+ <material name="green"> 
+ <color rgba="1 0 0 1"/> 
+ </material> 
+ </visual> 
+ </link> 
+</robot> 
