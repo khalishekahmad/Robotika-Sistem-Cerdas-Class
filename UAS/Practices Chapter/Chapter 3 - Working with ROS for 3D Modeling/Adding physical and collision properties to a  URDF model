@@ -1,0 +1,19 @@
+Good robot simulations can be obtained only if the robot dynamic parameters (for 
+instance, its mass, inertia, and more) are correctly specified in the urdf file. In the 
+following code, we include these parameters as part of the base_link:
+<link> 
+...... 
+<collision> 
+ <geometry> 
+ <cylinder length="0.03" radius="0.2"/> 
+ </geometry> 
+ <origin rpy="0 0 0" xyz="0 0 0"/> 
+ </collision> 
+ <inertial> 
+ <mass value="1"/> 
+ <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" 
+izz="1.0"/> 
+ </inertial> 
+........... 
+</link> 
+
