@@ -1,0 +1,28 @@
+After designing the URDF, we can view it on RViz. We can create a view_demo.
+launch launch file and put the following code into the launch folder. Navigate to 
+the mastering_ros_robot_description_pkg/launch directory for the code:
+<?xml version="1.0" ?>
+<launch>
+ <arg name="model" />
+ <param name="robot_description" textfile="$(find mastering_
+ros_robot_description_pkg)/urdf/pan_tilt.urdf" />
+ <node name="joint_state_publisher_gui" pkg="joint_state_
+publisher_gui" type="joint_state_publisher_gui" />
+ <node name="robot_state_publisher" pkg="robot_state_
+publisher" type="robot_state_publisher" />
+After designing the URDF, we can view it on RViz. We can create a view_demo.
+launch launch file and put the following code into the launch folder. Navigate to 
+the mastering_ros_robot_description_pkg/launch directory for the code:
+<?xml version="1.0" ?>
+<launch>
+ <arg name="model" />
+ <param name="robot_description" textfile="$(find mastering_
+ros_robot_description_pkg)/urdf/pan_tilt.urdf" />
+ <node name="joint_state_publisher_gui" pkg="joint_state_
+publisher_gui" type="joint_state_publisher_gui" />
+ <node name="robot_state_publisher" pkg="robot_state_
+publisher" type="robot_state_publisher" />
+
+We can launch the model using the following command:
+roslaunch mastering_ros_robot_description_pkg view_demo.launch 
+
