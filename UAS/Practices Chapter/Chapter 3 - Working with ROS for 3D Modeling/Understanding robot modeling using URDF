@@ -1,0 +1,46 @@
+The following tags are the commonly used URDF tags to compose a URDF robot model:
+• link: The link tag represents the single link of a robot. Using this tag, we can 
+model a robot link and its properties. The modeling includes the size, the shape, 
+and the color; it can even import a 3D mesh to represent the robot link. We can 
+also provide the dynamic properties of the link, such as the inertial matrix and the 
+collision properties.
+The syntax is as follows:
+<link name="<name of the link>"> 
+<inertial>...........</inertial> 
+ <visual> ............</visual> 
+ <collision>..........</collision> 
+</link>
+
+joint: The joint tag represents a robot joint. We can specify the kinematics and 
+dynamics of the joint and set the limits of the joint movement and its velocity. The 
+joint tag supports the different types of joints, such as revolute, continuous, 
+prismatic, fixed, floating, and planar.
+The syntax is as follows:
+<joint name="<name of the joint>"> 
+ <parent link="link1"/> 
+ <child link="link2"/> 
+ 
+ <calibration .... /> 
+ <dynamics damping ..../> 
+ <limit effort .... /> 
+</joint>
+
+robot: This tag encapsulates the entire robot model that can be represented using 
+URDF. Inside the robot tag, we can define the name of the robot, the links, and the 
+joints of the robot.
+The syntax is as follows:
+<robot name="<name of the robot>" 
+ <link> ..... </link> 
+ <link> ...... </link> 
+ <joint> ....... </joint> 
+ <joint> ........</joint> 
+</robot> 
+
+gazebo: This tag is used when we include the simulation parameters of the 
+Gazebo simulator inside the URDF. We can use this tag to include gazebo plugins, 
+gazebo material properties, and more. The following shows an example that uses 
+gazebo tags:
+ <gazebo reference="link_1"> 
+ <material>Gazebo/Black</material> 
+ </gazebo> 
+
