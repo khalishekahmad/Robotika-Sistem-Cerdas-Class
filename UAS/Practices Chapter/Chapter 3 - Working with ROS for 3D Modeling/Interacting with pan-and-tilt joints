@@ -1,0 +1,18 @@
+We can see that an extra GUI came along with RViz; it contains sliders to control the 
+pan joints and the tilt joints. This GUI is called the Joint State Publisher Gui node and 
+belongs to the joint_state_publisher_gui package:
+ <node name="joint_state_publisher_gui" pkg="joint_state_
+publisher_gui" type="joint_state_publisher_gui" /> 
+
+We can include this node in the launch file using the following statement. The limits of 
+pan-and-tilt should be mentioned inside the joint tag:
+ <joint name="pan_joint" type="revolute"> 
+ <parent link="base_link"/> 
+ <child link="pan_link"/> 
+ <origin xyz="0 0 0.1"/> 
+ <axis xyz="0 0 1" /> 
+ <limit effort="300" velocity="0.1" lower="-3.14" 
+upper="3.14"/> 
+ <dynamics damping="50" friction="1"/> 
+ </joint>
+
