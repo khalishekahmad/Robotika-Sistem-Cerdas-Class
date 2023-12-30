@@ -1,0 +1,10 @@
+After defining the elements that we must insert in the robot model file, we are now ready 
+to include 10 links and 9 joints (7 for the arm and 2 for the gripper) on this robot, and 2 
+links and 2 joints on the robot gripper.
+Let's start by looking at the xacro definition:
+<?xml version="1.0"?> 
+<robot name="seven_dof_arm" xmlns:xacro="http://ros.org/wiki/
+xacro"> 
+
+Because we are writing a xacro file, we should mention the xacro namespace to parse the 
+file; then, we can start to define the geometric properties of the arm
