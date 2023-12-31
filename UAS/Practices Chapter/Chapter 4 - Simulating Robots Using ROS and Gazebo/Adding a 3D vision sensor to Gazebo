@@ -1,0 +1,46 @@
+Here is how we include a Gazebo definition and a physical robot model of Xtion Pro in 
+the seven_dof_arm_with_rgbd.xacro robot .xacro file:
+<xacro:include filename="$(find mastering_ros_robot_
+description_pkg)/urdf/sensors/xtion_pro_live.urdf.xacro"/> 
+Inside xtion_pro_live.urdf.xacro, we can see the following lines:
+<?xml version="1.0"?> 
+<robot xmlns:xacro="http://ros.org/wiki/xacro"> 
+ <xacro:include filename="$(find mastering_ros_robot_
+description_pkg)/urdf/sensors/xtion_pro_live.gazebo.xacro"/> 
+................... 
+ <xacro:macro name="xtion_pro_live" params="name parent 
+*origin *optical_origin"> 
+................... 
+104 Simulating Robots Using ROS and Gazebo 
+ <link name="${name}_link"> 
+ ...................... 
+ <visual> 
+ <origin xyz="0 0 0" rpy="0 0 0"/> 
+ <geometry> 
+ <mesh filename="package://mastering_ros_robot_
+description_pkg/meshes/sensors/xtion_pro_live/xtion_pro_live.
+dae"/> 
+ </geometry> 
+ <material name="DarkGrey"/> 
+ </visual> 
+ </link> 
+</robot> 
+Here, we can see it includes another file called xtion_pro_live.gazebo.xacro, 
+which consists of the complete Gazebo definition of Xtion Pro.
+We can also see a macro definition named xtion_pro_live, which contains the 
+complete model definition of Xtion Pro, including links and joints:
+<mesh filename="package://mastering_ros_robot_description_pkg/
+meshes/sensors/xtion_pro_live/xtion_pro_live.dae"/> 
+In the macro definition, we are importing a mesh file of the Asus Xtion Pro, which will be 
+shown as the camera link in Gazebo.
+In the mastering_ros_robot_description_pkg/urdf/sensors/xtion_
+pro_live.gazebo.xacro file, we can set the Gazebo-ROS plugin of Xtion Pro. Here, 
+we will define the plugin as a macro with RGB and depth camera support. Here is the 
+plugin definition:
+ <plugin name="${name}_frame_controller" 
+filename="libgazebo_ros_openni_kinect.so"> 
+ <alwaysOn>true</alwaysOn> 
+ <updateRate>6.0</updateRate> 
+ <cameraName>${name}</cameraName> 
+ <imageTopicName>rgb/image_raw</imageTopicName> 
+ </plugin> 
