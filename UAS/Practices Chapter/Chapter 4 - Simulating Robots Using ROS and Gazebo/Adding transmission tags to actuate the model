@@ -1,0 +1,14 @@
+To actuate the robot using ROS controllers, we should define the <transmission>
+element to link actuators to joints. Here is the macro defined for transmission:
+ <xacro:macro name="transmission_block" params="joint_name"> 
+ <transmission name="tran1"> 
+ <type>transmission_interface/SimpleTransmission</type> 
+ <joint name="${joint_name}"> 
+ <hardwareInterface>hardware_interface/
+PositionJointInterface</hardwareInterface> 
+ </joint> 
+ <actuator name="motor1"> 
+ <mechanicalReduction>1</mechanicalReduction> 
+ </actuator> 
+ </transmission> 
+ </xacro:macro> 
